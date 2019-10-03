@@ -1,6 +1,5 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList'
-import TodoForm from './components/TodoComponents/TodoForm'
 
 const data = [{
     task: 'Organize Garage',
@@ -32,7 +31,6 @@ class App extends React.Component {
     console.log(this.state.todos)
   }
 
-
   toggle = (e, itemId) => {
     e.preventDefault()
     this.setState({
@@ -61,12 +59,24 @@ class App extends React.Component {
     })
   }
 
+  deleteTodo = e => {
+    e.preventDefault()
+    this.setState({
+      todos: this.state.todos.filter(item => {
+        return !item.completed
+      })
+    })
+  }
+
   render() {
     return (
       <div>
-        <h2>Welcome to your Todo App!</h2>
-        <TodoList todos={this.state.todos} toggle={this.toggle} />
-        <TodoForm addTodo={this.addTodo} />
+        <TodoList 
+          todos={this.state.todos}
+          addTodo={this.addTodo}
+          toggle={this.toggle}
+          deleteTodo={this.deleteTodo}
+        />
       </div>
     );
   }

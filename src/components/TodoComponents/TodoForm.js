@@ -13,16 +13,15 @@ export default class TodoForm extends Component {
     this.setState({
       value: e.target.value
     })
-    console.log(this.state.value)
   }
 
   handleSubmit = e => {
     e.preventDefault()
     console.log(this.state.value)
     this.props.addTodo(e, this.state.value)
-    // this.setState({
-    //   value: ''
-    // })
+    this.setState({
+      value: ''
+    })
   }
 
   render() {
@@ -34,7 +33,7 @@ export default class TodoForm extends Component {
           onChange={this.handleChange}
         />
         <button type="submit">Add Todo</button>
-        <button type="button">Clear Completed</button>
+        <button type="button" onClick={e => this.props.deleteTodo(e)}>Clear Completed</button>
       </form>
     )
   }
